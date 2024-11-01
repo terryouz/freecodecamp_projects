@@ -1,0 +1,34 @@
+def arithmetic_arranger(problems, show_answers=False):
+    # Lists to store each line of the arranged problems
+    top_numbers = []
+    bottom_numbers = []
+    dashes = []
+    answers = []
+
+    # Check if there are more than five problems, which is not allowed
+    if len(problems) > 5:
+        return 'Error: Too many problems.'
+
+    # Validate each problem for the correct format
+    for problem in problems:
+        parts = problem.split()  # Split each problem into components: number, operator, number
+        operator = parts[1]
+        numbers = [parts[0], parts[2]]
+
+        # Check for allowed operators (+ and - only are allowed)
+        if operator == '*' or operator == '/':
+            return "Error: Operator must be '+' or '-'."
+
+        # Check each number in the problem
+        for number in numbers:
+            # Ensure the number contains only digits
+            if not number.isdigit():
+                return 'Error: Numbers must only contain digits.'
+            # Ensure the number is no more than four digits long
+            if len(number) > 4:
+                return 'Error: Numbers cannot be more than four digits.'
+
+    # Process each problem to format it
+    for problem in problems:
+        parts = problem.split()
+        width = max(len(parts[0]), len(parts[2])) + 2  
