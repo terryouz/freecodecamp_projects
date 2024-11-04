@@ -1,0 +1,58 @@
+def add_time(start, duration, day=None):
+
+    #I am splitting the strings in parts (hour, minutes and am or pm when applicable to work with them seperately)
+
+    first_list = start.split()
+    start_list = first_list[0].split(":")
+    duration_list = duration.split(":")
+
+    hour = int(start_list[0])
+    minutes = int(start_list[1])
+    am_pm = first_list[1]
+    add_hour = int(duration_list[0])
+    add_minutes = int(duration_list[1])
+
+    #here I am handling the extra hour that comes from adding the new minutes
+    new_minutes = (minutes + add_minutes) % 60
+    extra_hour = (minutes + add_minutes) // 60
+
+    #here I will calculate the total added hours
+    total_hours = hour + add_hour + extra_hour
+    #print(total_hours)
+
+    n = total_hours // 24
+    #n days later
+    hours_within_day = total_hours % 24
+
+   #now let's find the new hour
+    new_hour = (hours_within_day % 12) or 12
+    #print(new_hour)
+
+    #here I am trying to figure out when AM changes to PM and vice versa.
+
+    if am_pm == "PM":
+        hours_within_day += 12
+    new_am_pm = am_pm
+    if hours_within_day >= 12:
+        new_am_pm = "PM" if am_pm == "AM" else "AM"
+        hours_within_day -= 12
+
+    #now let's work with the optional step to include a day
+    day_part = ''
+    if day:
+        this_day = day.capitalize()
+        day_list = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        current_index = day_list.index(this_day)
+        new_index = (current_index + n) % 7
+        new_day = day_list[new_index]
+        day_part = f", {new_day}"
+    #print(day_part)
+
+    if n > 1:
+        new_time = f'{new_hour}:{new_minutes:02} {new_am_pm}{day_part} ({n} days later)'
+    elif n == 1:
+        new_time = f'{new_hour}:{new_minutes:02} {new_am_pm}{day_part} (next day)'
+    else:
+        new_time = f'{new_hour}:{new_minutes:02} {new_am_pm}{day_part}'
+
+    return new_time
