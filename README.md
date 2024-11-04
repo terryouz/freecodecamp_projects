@@ -1,4 +1,4 @@
-# freecodecamp_projects
+# FreeCodeCamp Projects
 FreeCodeCamp Challenges
 
 ## Arithmetic Formater
