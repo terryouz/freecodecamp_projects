@@ -19,3 +19,6 @@ If the result will be the next day, it should show (next day) after the time. If
 
 If the function is given the optional starting day of the week parameter, then the output should display the day of the week of the result. The day of the week in the output should appear after the time and before the number of days later.
 
+## Ledger App Project
+
+Completes the Category class. It should be able to instantiate objects based on different budget categories like food, clothing, and entertainment. When objects are created, they are passed in the name of the category. The class should have an instance variable called ledger that is a list.
